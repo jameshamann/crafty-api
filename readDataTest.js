@@ -1,22 +1,22 @@
 var AWS = require("aws-sdk");
 
 AWS.config.update({
-  region: "us-west-2",
+  region: "eu-west-2",
   endpoint: "http://localhost:8000"
 });
 
 var docClient = new AWS.DynamoDB.DocumentClient()
 
-var table = "Movies";
+var table = "Beers";
 
-var year = 2015;
-var title = "The Big New Movie";
+var type = "IPA";
+var name = "Punk IPA";
 
 var params = {
     TableName: table,
     Key:{
-        "year": year,
-        "title": title
+        "type": type,
+        "name": name
     }
 };
 
