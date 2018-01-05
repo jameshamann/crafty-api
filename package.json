@@ -1,0 +1,9 @@
+{
+  "name": "crafty-api",
+  "version": "1.0.0",
+  "description": "API for Crafty Beer Apps",
+  "main": "index.js",
+  "repository": "https://github.com/jameshamann/crafty-api.git",
+  "author": "<jameshamann@me.com>",
+  "license": "MIT"
+}
