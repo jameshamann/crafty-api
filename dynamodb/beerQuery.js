@@ -26,7 +26,7 @@ docClient.query(params, function(err, data) {
     } else {
         console.log("Query succeeded.");
         data.Items.forEach(function(item) {
-            console.log(" -", item.type + ": " + item.name);
+            console.log(" -", item.type + ": " + item.name + ' ' + item.info['abv'] + '%');
         });
     }
 });

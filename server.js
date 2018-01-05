@@ -7,7 +7,18 @@ var bodyParser = require('body-parser');
 var AWS = require("aws-sdk");
 
 var app = express();
+
+
+
 app.listen(3000, () => console.log('Crafty API listening on port 3000!'))
+
+AWS.config.update({
+  region: "eu-west-2",
+  endpoint: "http://localhost:8000"
+});
+
+var docClient = new AWS.DynamoDB.DocumentClient();
+
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -16,6 +27,34 @@ app.use(cookieParser());
 
 app.get('/', function (req, res) {
   res.send({ title: "Crafty API Entry Point" })
+})
+
+app.get('/beers', function (req, res) {
+  var params = {
+      TableName : "Beers",
+      KeyConditionExpression: "#type = :type",
+      ExpressionAttributeNames:{
+          "#type": "type"
+      },
+      ExpressionAttributeValues: {
+          ":type": "Pale Ale"
+      }
+  };
+
+
+docClient.query(params, function(err, data) {
+    if (err) {
+        console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+    } else {
+        console.log("Query succeeded.");
+        data.Items.forEach(function(item) {
+            console.log(" -", item.type + ": " + item.name + ' ' + item.info['abv'] + '%');
+            res.send({item})
+        });
+    }
+});
+
+
 })
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
