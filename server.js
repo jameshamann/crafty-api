@@ -29,6 +29,42 @@ app.get('/', function (req, res) {
   res.send({ title: "Crafty API Entry Point" })
 })
 
+app.get('/beers', function (req, res) {
+
+
+  var params = {
+    TableName: "Beers",
+    ProjectionExpression: "#name, info",
+    ExpressionAttributeNames: {
+        "#name": "name",
+    }
+};
+
+console.log("Scanning Beers table.");
+docClient.scan(params, onScan);
+
+function onScan(err, data) {
+    if (err) {
+        console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+    } else {
+        res.send(data)
+        // print all the beers
+        console.log("Scan succeeded.");
+        data.Items.forEach(function(beer) {
+           console.log(
+                beer.type + ":",
+                beer.name + ": " + beer.info.abv + "%" );
+        });
+
+        if (typeof data.LastEvaluatedKey != "undefined") {
+            console.log("Scanning for more...");
+            params.ExclusiveStartKey = data.LastEvaluatedKey;
+            docClient.scan(params, onScan);
+        }
+    }
+  }
+})
+
 
 app.get('/beers/:type', function (req, res) {
 
