@@ -37,7 +37,7 @@ app.get('/beers', function (req, res) {
           "#type": "type"
       },
       ExpressionAttributeValues: {
-          ":type": "Pale Ale"
+          ":type": "IPA"
       }
   };
 
@@ -47,9 +47,9 @@ docClient.query(params, function(err, data) {
         console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
     } else {
         console.log("Query succeeded.");
-        data.Items.forEach(function(item) {
-            console.log(" -", item.type + ": " + item.name + ' ' + item.info['abv'] + '%');
-            res.send({item})
+        res.send(data.Items)
+        data.Items.forEach(function(beer) {
+            console.log(" -", beer.type + ": " + beer.name + ' ' + beer.info['abv'] + '%');
         });
     }
 });
