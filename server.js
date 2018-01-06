@@ -29,7 +29,13 @@ app.get('/', function (req, res) {
   res.send({ title: "Crafty API Entry Point" })
 })
 
-app.get('/beers', function (req, res) {
+
+app.get('/beers/:type', function (req, res) {
+
+  var beerType = req.url.slice(7)
+
+
+  console.log(beerType)
   var params = {
       TableName : "Beers",
       KeyConditionExpression: "#type = :type",
@@ -37,7 +43,7 @@ app.get('/beers', function (req, res) {
           "#type": "type"
       },
       ExpressionAttributeValues: {
-          ":type": "IPA"
+          ":type": beerType.toUpperCase()
       }
   };
 
