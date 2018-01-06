@@ -1,1 +1,3 @@
-# crafty-api
+# Crafty API
+
+A Node.js API for Beers.

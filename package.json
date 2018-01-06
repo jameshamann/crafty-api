@@ -1,9 +1,19 @@
 {
   "name": "crafty-api",
-  "version": "1.0.0",
-  "description": "API for Crafty Beer Apps",
-  "main": "index.js",
-  "repository": "https://github.com/jameshamann/crafty-api.git",
-  "author": "<jameshamann@me.com>",
-  "license": "MIT"
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.176.0",
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.0",
+    "nodemon": "^1.14.7",
+    "serve-favicon": "~2.4.5"
+  }
 }
