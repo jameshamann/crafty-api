@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    parallelism: 2
     docker:
       - image: dwmkerr/dynamodb
 
@@ -15,7 +14,7 @@ jobs:
 
       - run:
           name: Install Yarn
-          command: 'apk add yarn'
+          command: 'wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo && yum install yarn'
 
       - run:
           name: Setup Container
