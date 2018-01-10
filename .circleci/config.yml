@@ -35,6 +35,7 @@ jobs:
       - image: circleci/node
     steps:
       - checkout
+      - run: netstat -vanp tcp | grep 3000
       - run: yarn install
       - run: yarn test
 
