@@ -11,8 +11,8 @@ jobs:
       - checkout
       - run:
           name: Sudo
-          command: 'su -'
-          
+          command: 'su -&'
+
       - run:
           name: Install Yarn
           command: 'curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
