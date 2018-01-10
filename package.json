@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test": "cd dynamodb && newman run CraftyAPI_Tests.json && cd ..",
+    "create-db": "cd dynamodb && node createBeersTable.js && cd ..",
+    "delete-db": "cd dynamodb && node deleteBeersTable.js && cd ..",
+    "load-db-data": "cd dynamodb && node loadBeersData.js && cd .."
   },
   "dependencies": {
     "aws-sdk": "^2.176.0",
@@ -13,6 +17,7 @@
     "express": "~4.15.5",
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
+    "newman": "^3.9.1",
     "nodemon": "^1.14.7",
     "serve-favicon": "~2.4.5"
   }
