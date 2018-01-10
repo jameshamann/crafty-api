@@ -1,6 +1,7 @@
 version: 2
 jobs:
    build:
+     working_directory: ~/crafty-api
      docker:
         - image: deangiberson/aws-dynamodb-local
      steps:
@@ -19,5 +20,11 @@ jobs:
                key: dependency-cache-{{ checksum "package.json" }}
                paths:
                  - node_modules
-           name: Run Tests
-           command: 'yarn test'
+    test:
+      docker:
+        - image: deangiberson/aws-dynamodb-local
+      steps:
+        - Checkout Code
+        - run:
+            name: Test
+            command: yarn test
