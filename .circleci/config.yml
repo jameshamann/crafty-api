@@ -14,7 +14,7 @@ jobs:
 
       - run:
           name: Install Yarn
-          command: 'wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo && yum install yarn'
+          command: 'yum install yarn'
 
       - run:
           name: Setup Container
