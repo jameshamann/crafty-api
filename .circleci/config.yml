@@ -2,7 +2,7 @@ version: 2
 jobs:
    build:
      docker:
-        - image: aws-dynamodb-local
+        - image: deangiberson/aws-dynamodb-local
      steps:
         - checkout
         - run:
