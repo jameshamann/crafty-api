@@ -35,6 +35,7 @@ jobs:
       - image: circleci/node
     steps:
       - checkout
+      - run: yarn install
       - run: yarn test
 
 workflows:
