@@ -6,14 +6,6 @@ jobs:
      steps:
         - checkout
         - run:
-           name: install java
-           command: |
-              apt-get update && apt-get install default-jre default-jdk && Y
-        - run:
-           name: accept java
-           command: |
-              y
-        - run:
            name: setup container
            command: |
               curl -k -L -o dynamodb-local.tgz http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz
