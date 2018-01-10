@@ -26,6 +26,8 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
+      - run: npm install newman -global;
+
       - run: yarn install
 
       - save_cache:
@@ -39,6 +41,5 @@ jobs:
 
       - run: java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb:
         background: true
-
       # run tests!
       - run: yarn test

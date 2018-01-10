@@ -1,0 +1,132 @@
+{
+	"info": {
+		"name": "Crafty",
+		"_postman_id": "0d5fe51e-0740-f7bc-4f53-db0483168cc4",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Beers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4250affc-cbd1-4c4c-ae11-9b912620c9a0",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response Body Contains Beer Names\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Punk IPA\");",
+							"    pm.expect(pm.response.text()).to.include(\"Elvis Juice\");",
+							"    pm.expect(pm.response.text()).to.include(\"Camden Pale Ale\");",
+							"});",
+							"",
+							"pm.test(\"Status code is 200, Request Successful\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:3000/beers",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"beers"
+					]
+				},
+				"description": "Test Call to Local DB for Beers"
+			},
+			"response": []
+		},
+		{
+			"name": "Get IPA Beers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6a494e76-7ada-4a55-9c6e-e8b952f7f4ef",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response Body Only Contains IPA Beers\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Punk IPA\");",
+							"    pm.expect(pm.response.text()).to.include(\"Elvis Juice\");",
+							"    pm.expect(pm.response.text()).to.not.include(\"Camden Pale Ale\");",
+							"});",
+							"",
+							"pm.test(\"Status code is 200, Request Successful\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:3000/beers/ipa",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"beers",
+						"ipa"
+					]
+				},
+				"description": "Test Call to Local DB for IPA Type Beers"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Pale Ale Beers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f2f3fd9f-62bf-4ae1-a779-b676ddc018cb",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response Body Only Contains IPA Beers\", function () {",
+							"    pm.expect(pm.response.text()).to.not.include(\"Punk IPA\");",
+							"    pm.expect(pm.response.text()).to.not.include(\"Elvis Juice\");",
+							"    pm.expect(pm.response.text()).to.include(\"Camden Pale Ale\");",
+							"});",
+							"",
+							"pm.test(\"Status code is 200, Request Successful\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:3000/beers/pa",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"beers",
+						"pa"
+					]
+				},
+				"description": "Test Call to Local DB for Pale Ale Type Beers"
+			},
+			"response": []
+		}
+	]
+}
