@@ -28,7 +28,7 @@ jobs:
             - node_modules
       - run:
           name: Run API Server
-          command: 'yarn start'
+          command: 'yarn ci-start'
       - run:
           name: Run Tests
           command: 'yarn test'
