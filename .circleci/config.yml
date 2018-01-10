@@ -27,9 +27,6 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run:
-          name: Run API Server
-          command: 'yarn ci-start'
   test:
     docker:
       - image: circleci/node
