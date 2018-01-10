@@ -6,7 +6,8 @@
         "brewery" : "Brewdog",
         "abv" : 6.4,
         "image_url" : "https://img.saveur-biere.com/img/p/1611-16087-v4_product_img.jpg",
-        "description" : "A nice beer"
+        "description" : "A nice beer",
+        "style": "IPA"
     },
     "type" : "IPA",
     "name" : "Elvis Juice",
@@ -14,7 +15,8 @@
         "brewery" : "Brewdog",
         "abv" : 6.4,
         "image_url" : "https://img.saveur-biere.com/img/p/1611-16087-v4_product_img.jpg",
-        "description" : "Grapefruit Infused"
+        "description" : "Grapefruit Infused",
+        "style": "IPA"
     },
     "type" : "PA",
     "name" : "Camden Pale Ale",
@@ -22,7 +24,9 @@
         "brewery" : "Camden Town",
         "abv" : 4.2,
         "image_url" : "https://img.saveur-biere.com/img/p/1611-16087-v4_product_img.jpg",
-        "description" : "Nice and Light with Flavour"
+        "description" : "Nice and Light with Flavour",
+        "style": "Pale Ale"
+
     },
     "type" : "PA",
     "name" : "Sierra Nevada",
@@ -30,7 +34,9 @@
         "brewery" : "Sierra Nevada",
         "abv" : 4.5,
         "image_url" : "https://img.saveur-biere.com/img/p/1611-16087-v4_product_img.jpg",
-        "description" : "Nice and Light"
+        "description" : "Nice and Light",
+        "style": "Pale Ale"
+
     }
   }
 ]
