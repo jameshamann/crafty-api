@@ -10,9 +10,9 @@ jobs:
            command: |
               apt-get update && apt-get install default-jre default-jdk
         - run:
-          name: accept java
-          command: | 
-            y
+           name: accept java
+           command: |
+              y
         - run:
            name: setup container
            command: |
