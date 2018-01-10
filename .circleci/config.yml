@@ -17,7 +17,7 @@ jobs:
               java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb&
       - run:
           name: Update yarn
-          command: 'sudo yarn install -g npm@latest'
+          command: 'yarn install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
