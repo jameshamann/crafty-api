@@ -13,6 +13,7 @@ console.log("Importing Beers into DynamoDB. Please wait.");
 var allBeers = JSON.parse(fs.readFileSync('beerdata.json', 'utf8'));
 
 allBeers.forEach(function(beer) {
+
     var params = {
         TableName: "Beers",
         Item: {
