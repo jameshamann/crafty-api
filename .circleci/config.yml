@@ -2,8 +2,10 @@ version: 2
 jobs:
   build:
     working_directory: ~/crafty-api
+    # The primary container is an instance of the first list image listed. Your build commands run in this container.
     docker:
       - image: deangiberson/aws-dynamodb-local
+    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
     steps:
       - checkout
       name: Setup Container
@@ -11,10 +13,14 @@ jobs:
           curl -k -L -o dynamodb-local.tgz http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz
           tar -xzf dynamodb-local.tgz
           java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
-      name: Install Dependancies
-      command: 'sudo yarn install -g'
+      - run:
+          name: Update yarn
+          command: 'sudo yarn install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install npm wee
+          command: yarn install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
@@ -28,15 +34,14 @@ jobs:
           name: Test
           command: yarn test
 
-
-  workflows:
-    version: 2
-    build_and_test:
-      jobs:
-        - build
-        - test:
-            requires:
-              - build
-            filters:
-              branches:
-                only: master
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
