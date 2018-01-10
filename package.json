@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon server.js",
-    "ci-start": "node server.js&",
+    "ci-start": "node server.js",
     "test": "cd dynamodb && newman run CraftyAPI_Tests.json && cd ..",
     "create-db": "cd dynamodb && node createBeersTable.js && cd ..",
     "delete-db": "cd dynamodb && node deleteBeersTable.js && cd ..",
