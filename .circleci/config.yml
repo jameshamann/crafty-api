@@ -3,12 +3,17 @@ jobs:
   build:
     parallelism: 2
     docker:
-      - image: deangiberson/aws-dynamodb-local
+      - image: dwmkerr/dynamodb
 
     working_directory: ~/repo
 
     steps:
       - checkout
+      - run:
+          name: Install Yarn
+          command: 'curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+                    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && sudo apt-get update && sudo apt-get install yarn'
+
       - run:
           name: Setup Container
           command: |
@@ -17,19 +22,19 @@ jobs:
               java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb&
       - run:
           name: Update yarn
-          command: 'npm install -g npm@latest'
+          command: 'yarn install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Install npm wee
-          command: npm install
+          command: yarn install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
   test:
     docker:
-      - image: deangiberson/aws-dynamodb-local
+      - image: dwmkerr/dynamodb
     steps:
       - checkout
       - run:
