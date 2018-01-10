@@ -36,5 +36,9 @@ jobs:
           command: 'yarn ci-start'
           background: true
       - run:
+          name: Create Beers Table
+          command: 'yarn create-db'
+          background: true
+      - run:
           name: Run Tests
           command: 'yarn test'
