@@ -17,6 +17,13 @@ jobs:
     working_directory: ~/repo
 
     steps:
+        - run: curl -k -L -o dynamodb-local.tgz https://s3.eu-central-1.amazonaws.com/dynamodb-local-frankfurt/dynamodb_local_latest.tar.gz
+
+        - run: tar -xzf dynamodb-local.tgz
+
+        - run: java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb:
+          background: true
+          
       - checkout
 
       # Download and cache dependencies
@@ -35,11 +42,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: curl -k -L -o dynamodb-local.tgz https://s3.eu-central-1.amazonaws.com/dynamodb-local-frankfurt/dynamodb_local_latest.tar.gz
 
-      - run: tar -xzf dynamodb-local.tgz
-
-      - run: java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb:
-        background: true
       # run tests!
       - run: yarn test
