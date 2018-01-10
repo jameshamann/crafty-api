@@ -1,24 +1,24 @@
 version: 2
 jobs:
   build:
-   working_directory: ~/crafty-api
-   docker:
+    working_directory: ~/crafty-api
+    docker:
       - image: deangiberson/aws-dynamodb-local
-   steps:
-      - checkout
-         name: Setup Container
-         command: |
+      steps:
+        - checkout
+        name: Setup Container
+        command: |
             curl -k -L -o dynamodb-local.tgz http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz
             tar -xzf dynamodb-local.tgz
             java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
-         name: Install Dependancies
-         command: 'sudo yarn install -g'
-         - restore_cache:
-             key: dependency-cache-{{ checksum "package.json" }}
-         - save_cache:
-             key: dependency-cache-{{ checksum "package.json" }}
-             paths:
-               - node_modules
+        name: Install Dependancies
+        command: 'sudo yarn install -g'
+        - restore_cache:
+            key: dependency-cache-{{ checksum "package.json" }}
+        - save_cache:
+            key: dependency-cache-{{ checksum "package.json" }}
+            paths:
+              - node_modules
   test:
     docker:
       - image: deangiberson/aws-dynamodb-local
