@@ -10,6 +10,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Java
+          command: 'sudo apt-get update && sudo apt-get install default-jre default-jdk'
+      - run:
           name: Setup Container
           command: |
               curl -k -L -o dynamodb-local.tgz http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz
@@ -33,5 +36,5 @@ jobs:
           command: 'yarn ci-start'
           background: true
       - run:
-          name: Start Server
+          name: Run Tests
           command: 'yarn test'
