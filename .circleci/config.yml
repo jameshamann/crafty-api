@@ -2,20 +2,12 @@ version: 2
 jobs:
   build:
     docker:
-      - image: dwmkerr/dynamodb
+      - image: circleci/node
 
     working_directory: ~/repo
 
     steps:
       - checkout
-      - run:
-          name: Sudo
-          command: 'su -&'
-
-      - run:
-          name: Install Yarn
-          command: 'pacman -S yarn'
-
       - run:
           name: Setup Container
           command: |
@@ -36,7 +28,7 @@ jobs:
             - node_modules
   test:
     docker:
-      - image: dwmkerr/dynamodb
+      - image: circleci/node
     steps:
       - checkout
       - run:
