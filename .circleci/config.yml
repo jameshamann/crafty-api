@@ -5,8 +5,7 @@ jobs:
      docker:
         - image: deangiberson/aws-dynamodb-local
      steps:
-        - Checkout Code
-        - run: git clone https://github.com/jameshamann/crafty-api.git
+        - checkout
            name: Setup Container
            command: |
               curl -k -L -o dynamodb-local.tgz http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz
@@ -24,7 +23,7 @@ jobs:
       docker:
         - image: deangiberson/aws-dynamodb-local
       steps:
-        - Checkout Code
+        - checkout
         - run:
             name: Test
             command: yarn test
