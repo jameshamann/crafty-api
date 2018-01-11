@@ -10,7 +10,7 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 
 console.log("Importing Beers into DynamoDB. Please wait.");
 
-var allBeers = JSON.parse(fs.readFileSync('beerdata.json', 'utf8'));
+var allBeers = JSON.parse(fs.readFileSync('PA.json', 'utf8'));
 
 allBeers.forEach(function(beer) {
   console.log(beer)

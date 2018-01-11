@@ -12,13 +12,12 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "4250affc-cbd1-4c4c-ae11-9b912620c9a0",
+						"id": "76a3cd5a-6e85-4c14-b0a8-f9eac91acbfe",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Response Body Contains Beer Names\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"Punk IPA\");",
-							"    pm.expect(pm.response.text()).to.include(\"Elvis Juice\");",
 							"    pm.expect(pm.response.text()).to.include(\"Camden Pale Ale\");",
+							"    pm.expect(pm.response.text()).to.include(\"Elvis Juice\");",
 							"});",
 							"",
 							"pm.test(\"Status code is 200, Request Successful\", function () {",
@@ -52,11 +51,10 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "6a494e76-7ada-4a55-9c6e-e8b952f7f4ef",
+						"id": "2847d648-e340-41e4-8bf5-7a47357d6121",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Response Body Only Contains IPA Beers\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"Punk IPA\");",
 							"    pm.expect(pm.response.text()).to.include(\"Elvis Juice\");",
 							"    pm.expect(pm.response.text()).to.not.include(\"Camden Pale Ale\");",
 							"});",
@@ -93,11 +91,10 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f2f3fd9f-62bf-4ae1-a779-b676ddc018cb",
+						"id": "c1b5476a-eea6-4907-bbcd-37537306187b",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Response Body Only Contains IPA Beers\", function () {",
-							"    pm.expect(pm.response.text()).to.not.include(\"Punk IPA\");",
 							"    pm.expect(pm.response.text()).to.not.include(\"Elvis Juice\");",
 							"    pm.expect(pm.response.text()).to.include(\"Camden Pale Ale\");",
 							"});",

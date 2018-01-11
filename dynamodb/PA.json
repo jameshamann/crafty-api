@@ -1,0 +1,14 @@
+[
+  {
+    "type" : "PA",
+    "name" : "Camden Pale Ale",
+    "info" : {
+        "brewery" : "Camden Town",
+        "abv" : 4.2,
+        "image_url" : "https://img.saveur-biere.com/img/p/1611-16087-v4_product_img.jpg",
+        "description" : "Nice and Light with Flavour",
+        "style": "Pale Ale"
+
+    }
+  }
+]
