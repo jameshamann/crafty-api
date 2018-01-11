@@ -1,0 +1,20 @@
+branch-defaults:
+  7-eb-deploy:
+    environment: Crafty-env
+environment-defaults:
+  Crafty-env:
+    branch: null
+    repository: null
+global:
+  application_name: Crafty
+  default_ec2_keyname: null
+  default_platform: arn:aws:elasticbeanstalk:eu-west-1::platform/Node.js running on
+    64bit Amazon Linux/4.4.1
+  default_region: eu-west-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  sc: git
+  workspace_type: Application
