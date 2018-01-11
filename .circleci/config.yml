@@ -39,8 +39,11 @@ jobs:
           name: Create Beers Table
           command: 'yarn create-db'
       - run:
-          name: Load Beer Data
-          command: 'yarn load-db-data'
+          name: Load IPA Data
+          command: 'yarn load-ipa-data'
+      - run:
+          name: Load Pale Ale Data
+          command: 'yarn load-pa-data'
       - run:
           name: Run Tests
           command: 'yarn test'
