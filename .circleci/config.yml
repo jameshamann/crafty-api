@@ -20,55 +20,55 @@ jobs:
       - run:
           name: Install Python
           command: 'sudo apt-get update && sudo apt-get install -y python-dev'
-    - run:
-        name: Install Python
-        command: 'sudo curl -O https://bootstrap.pypa.io/get-pip.py'
-    - run:
-        name: Install Python
-        command: 'sudo python get-pip.py'
+      - run:
+          name: Install Python
+          command: 'sudo curl -O https://bootstrap.pypa.io/get-pip.py'
+      - run:
+          name: Install Python
+          command: 'sudo python get-pip.py'
 
-    - run:
-        name: Install AWS CLI
-        command: 'sudo pip install awscli --upgrade'
-    - run:
-        name: Setup Container
-        command: |
-            curl -k -L -o dynamodb-local.tgz http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz
-            tar -xzf dynamodb-local.tgz
-            java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
-        background: true
-    - run:
-        name: Update yarn
-        command: 'yarn global add npm@latest'
-    - restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
-    - run:
-        name: Install Dependencies
-        command: yarn install
-    - save_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
-        paths:
-          - node_modules
-    - run:
-        name: Start Server
-        command: 'yarn ci-start'
-        background: true
-    - run:
-        name: Create Beers Table
-        command: 'yarn create-db'
-    - run:
-        name: Load IPA Data
-        command: 'yarn load-ipa-data'
-    - run:
-        name: Load Pale Ale Data
-        command: 'yarn load-pa-data'
-    - run:
-        name: Run Tests
-        command: 'yarn test'
-    - run:
-        name: Deploy to AWS Elastic Beanstalk
-        command: 'eb init Crafty -r eu-west-1 -p arn:aws:elasticbeanstalk:eu-west-1::platform/Node.js running on
-                  64bit Amazon Linux/4.4.1'
-    - run:
-        name: Deploy to AWS Elastic Beanstalk
-        command: 'eb deploy Crafty-env'
+      - run:
+          name: Install AWS CLI
+          command: 'sudo pip install awscli --upgrade'
+      - run:
+          name: Setup Container
+          command: |
+              curl -k -L -o dynamodb-local.tgz http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz
+              tar -xzf dynamodb-local.tgz
+              java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
+          background: true
+      - run:
+          name: Update yarn
+          command: 'yarn global add npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Start Server
+          command: 'yarn ci-start'
+          background: true
+      - run:
+          name: Create Beers Table
+          command: 'yarn create-db'
+      - run:
+          name: Load IPA Data
+          command: 'yarn load-ipa-data'
+      - run:
+          name: Load Pale Ale Data
+          command: 'yarn load-pa-data'
+      - run:
+          name: Run Tests
+          command: 'yarn test'
+      - run:
+          name: Deploy to AWS Elastic Beanstalk
+          command: 'eb init Crafty -r eu-west-1 -p arn:aws:elasticbeanstalk:eu-west-1::platform/Node.js running on
+                    64bit Amazon Linux/4.4.1'
+      - run:
+          name: Deploy to AWS Elastic Beanstalk
+          command: 'eb deploy Crafty-env'
