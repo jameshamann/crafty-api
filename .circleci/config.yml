@@ -1,5 +1,9 @@
 version: 2
 
+branches:
+    only:
+     - master # list of branches to build
+
 jobs:
   build:
     docker:
@@ -7,11 +11,25 @@ jobs:
 
     working_directory: ~/repo
 
+
     steps:
       - checkout
       - run:
           name: Install Java
           command: 'sudo apt-get update && sudo apt-get install default-jre default-jdk'
+      - run:
+          name: Install Python
+          command: 'sudo apt-get update && sudo apt-get install -y python-dev'
+      - run:
+          name: Install Python
+          command: 'sudo curl -O https://bootstrap.pypa.io/get-pip.py'
+      - run:
+          name: Install Python
+          command: 'sudo python get-pip.py'
+
+      - run:
+          name: Install AWS CLI
+          command: 'sudo pip install awsebcli --upgrade'
       - run:
           name: Setup Container
           command: |
@@ -47,3 +65,10 @@ jobs:
       - run:
           name: Run Tests
           command: 'yarn test'
+      - run:
+          name: Deploy to AWS Elastic Beanstalk
+          command: 'eb init Crafty -r eu-west-1 -p arn:aws:elasticbeanstalk:eu-west-1::platform/Node.js running on
+                    64bit Amazon Linux/4.4.1'
+      - run:
+          name: Deploy to AWS Elastic Beanstalk
+          command: 'eb deploy Crafty-env'
