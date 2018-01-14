@@ -3,8 +3,8 @@ branch-defaults:
     environment: crafty-staging
 environment-defaults:
   crafty-staging:
-    branch: master
-    repository: https://github.com/jameshamann/crafty-api
+    branch: null
+    repository: null
 global:
   application_name: Crafty
   default_ec2_keyname: null
