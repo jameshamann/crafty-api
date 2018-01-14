@@ -1,16 +1,16 @@
 branch-defaults:
-  7-eb-deploy:
-    environment: Crafty-env
+  master:
+    environment: crafty-staging
 environment-defaults:
-  Crafty-env:
-    branch: null
-    repository: null
+  crafty-staging:
+    branch: master
+    repository: https://github.com/jameshamann/crafty-api
 global:
   application_name: Crafty
   default_ec2_keyname: null
-  default_platform: arn:aws:elasticbeanstalk:eu-west-1::platform/Node.js running on
-    64bit Amazon Linux/4.4.1
-  default_region: eu-west-1
+  default_platform: arn:aws:elasticbeanstalk:eu-west-2::platform/Node.js running on
+    64bit Amazon Linux/4.4.3
+  default_region: eu-west-2
   include_git_submodules: true
   instance_profile: null
   platform_name: null

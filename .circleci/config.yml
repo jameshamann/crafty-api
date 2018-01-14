@@ -67,8 +67,8 @@ jobs:
           command: 'yarn test'
       - run:
           name: Deploy to AWS Elastic Beanstalk
-          command: 'eb init Crafty -r eu-west-1 -p arn:aws:elasticbeanstalk:eu-west-1::platform/Node.js running on
-                    64bit Amazon Linux/4.4.1'
+          command: 'eb init Crafty -r eu-west-2 -p arn:aws:elasticbeanstalk:eu-west-2::platform/Node.js running on
+                    64bit Amazon Linux/4.4.3'
       - run:
           name: Deploy to AWS Elastic Beanstalk
-          command: 'eb deploy Crafty-env'
+          command: 'eb deploy crafty-staging'
