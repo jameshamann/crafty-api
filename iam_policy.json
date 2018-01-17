@@ -8,7 +8,7 @@
     "dynamodb:PutItem"
    ],
    "Resource": [
-    "arn:aws:dynamodb:eu-west-1:677471806624:table/Beers"
+    "arn:aws:dynamodb:eu-west-2:677471806624:table/Beers"
    ],
    "Condition": {
     "ForAllValues:StringEquals": {
