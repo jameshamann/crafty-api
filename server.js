@@ -14,7 +14,7 @@ app.listen(3000, () => console.log('Crafty API listening on port 3000!'))
 
 AWS.config.update({
   region: "eu-west-2",
-  endpoint: "arn:aws:dynamodb:eu-west-2:677471806624:table/Beers"
+  endpoint: "http://localhost:8000"
 });
 
 var docClient = new AWS.DynamoDB.DocumentClient();
