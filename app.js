@@ -34,7 +34,10 @@ if (cluster.isMaster) {
     var ddb = new AWS.DynamoDB();
 
     var ddbTable =  process.env.STARTUP_SIGNUP_TABLE;
+    var ddbbeerTable =  process.env.CRAFTY_BEER_TABLE;
+
     var snsTopic =  process.env.NEW_SIGNUP_TOPIC;
+
     var app = express();
 
     app.set('view engine', 'ejs');
@@ -43,6 +46,14 @@ if (cluster.isMaster) {
 
     app.get('/', function(req, res) {
         res.render('index', {
+            static_path: 'static',
+            theme: process.env.THEME || 'flatly',
+            flask_debug: process.env.FLASK_DEBUG || 'false'
+        });
+    });
+
+    app.get('/beers', function(req, res) {
+        res.render('beers', {
             static_path: 'static',
             theme: process.env.THEME || 'flatly',
             flask_debug: process.env.FLASK_DEBUG || 'false'
@@ -74,7 +85,7 @@ if (cluster.isMaster) {
                 console.log('DDB Error: ' + err);
             } else {
                 sns.publish({
-                    'Message': 'Name: ' + req.body.name + "\r\nEmail: " + req.body.email 
+                    'Message': 'Name: ' + req.body.name + "\r\nEmail: " + req.body.email
                                         + "\r\nPreviewAccess: " + req.body.previewAccess,
                     'Subject': 'New Crafty API User SignUp!',
                     'TopicArn': snsTopic
@@ -88,6 +99,34 @@ if (cluster.isMaster) {
                 });
             }
         });
+    });
+
+    app.post('/beers', function(req, res) {
+        var item = {
+            'type': {'S': req.body.type},
+            'name': {'S': req.body.name},
+            'abv': {'N': req.body.abv},
+            'description': {'S': req.body.description}
+        };
+
+        ddb.putItem({
+            'TableName': ddbbeerTable,
+            'Item': item,
+            'Expected': { type: { Exists: false } }
+        }, function(err, data) {
+            if (err) {
+                var returnStatus = 500;
+
+                if (err.code === 'ConditionalCheckFailedException') {
+                    returnStatus = 409;
+                }
+
+                res.status(returnStatus).end();
+                console.log('DDB Error: ' + err);
+            } else {
+                console.log('Success')
+            }
+        })
     });
 
     var port = process.env.PORT || 3000;
