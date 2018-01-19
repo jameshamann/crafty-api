@@ -51,6 +51,14 @@ if (cluster.isMaster) {
         });
     });
 
+    app.get('/beers', function(req, res) {
+        res.render('beers', {
+            static_path: 'static',
+            theme: process.env.THEME || 'flatly',
+            flask_debug: process.env.FLASK_DEBUG || 'false'
+        });
+    });
+
 
     app.post('/signup', function(req, res) {
         var item = {
@@ -94,16 +102,16 @@ if (cluster.isMaster) {
 
     app.post('/beers', function(req, res) {
         var item = {
-            'email': {'S': req.body.email},
+            'type': {'S': req.body.type},
             'name': {'S': req.body.name},
-            'preview': {'S': req.body.previewAccess},
-            'theme': {'S': req.body.theme}
+            'abv': {'N': req.body.abv},
+            'description': {'S': req.body.description}
         };
 
         ddb.putItem({
-            'TableName': ddbTable,
+            'TableName': ddbbeerTable,
             'Item': item,
-            'Expected': { email: { Exists: false } }
+            'Expected': { type: { Exists: false } }
         }, function(err, data) {
             if (err) {
                 var returnStatus = 500;
@@ -116,9 +124,10 @@ if (cluster.isMaster) {
                 console.log('DDB Error: ' + err);
             } else {
                 sns.publish({
-                    'Message': 'Name: ' + req.body.name + "\r\nEmail: " + req.body.email
-                                        + "\r\nPreviewAccess: " + req.body.previewAccess,
-                    'Subject': 'New Crafty API User SignUp!',
+                    'Message': 'Type: ' + req.body.type + "\r\nName: " + req.body.name
+                                        + "\r\nABV: " + req.body.abv
+                                        + "\r\nDescription: " + req.body.description,
+                    'Subject': 'New Beer Added to Crafty API!',
                     'TopicArn': snsTopic
                 }, function(err, data) {
                     if (err) {

@@ -33,19 +33,19 @@
       	Flask is in debug mode. This is not safe for production.
       </div>
       <% } %>
-      <div id="signupSuccess" class="alert alert-success" style="display:none">
-        <p id="signupSuccessText">Thanks for signing up! You'll be among the first to know when we launch.</p>
+      <div id="beerSuccess" class="alert alert-success" style="display:none">
+        <p id="beerSuccessText">Thanks for adding a beer!</p>
       </div>
-      <div id="signupDuplicate" class="alert alert-success" style="display:none">
-        <p id="signupDuplicateText">Fear not, you're already on the list! You'll be among the first to know when we launch.</p>
+      <div id="beerDuplicate" class="alert alert-success" style="display:none">
+        <p id="beerDuplicateText">Fear not, you're beer has already been addded!</p>
       </div>
-      <div id="signupError" class="alert alert-info" style="display:none">
-        <p id="signupErrorText">Well this is embarrassing. It looks like we're having trouble getting you on the list.</p>
+      <div id="beerError" class="alert alert-info" style="display:none">
+        <p id="beerErrorText">Well this is embarrassing. It looks like we're having trouble adding that beer.</p>
       </div>
       <div class="jumbotron">
-        <h1>The next big thing is coming...</h1>
-        <p class="lead">We're pretty thrilled to unveil our latest creation. Sign up below to be notified when we officially launch!</p>
-        <p><a class="btn btn-lg btn-success"  data-toggle="modal" href="#signupModal">Sign up today</a></p>
+        <h1>Help us further grow our database of Beers!</h1>
+        <p class="lead">Help us out in the meantime and add a beer below</p>
+        <p><a class="btn btn-lg btn-success"  data-toggle="modal" href="#signupModal">Add Beer</a></p>
       </div>
 
 
@@ -59,29 +59,30 @@
            <div class="modal-content">
              <div class="modal-header">
                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-               <h4 class="modal-title">Provide a few details and we'll be in touch...</h4>
+               <h4 class="modal-title">Add a new Beer</h4>
              </div>
              <div class="modal-body">
-               <form id="signupForm" role="form">
+               <form id="newBeerForm" role="form">
                  <input type="hidden" id="theme" name="theme" value="<%= theme %>"/>
                  <div class="form-group">
                    <label for="type">Type of Beer</label>
-                   <input type="text" class="form-control" id="name" name="type" placeholder="Your name">
+                   <input type="text" class="form-control" id="type" name="type" placeholder="Type of Beer">
                  </div>
                  <div class="form-group">
                    <label for="name">Beer Name</label>
-                   <input type="text" class="form-control" id="email" name="name" placeholder="Your email address">
+                   <input type="text" class="form-control" id="name" name="name" placeholder="Name of Beer">
                  </div>
                  <div class="form-group">
-                   <label for="previewAccess">Interested in Preview Access?</label>
-                   <select class="form-control" name="previewAccess">
-                     <option>Yes</option>
-                     <option>No</option>
-                   </select>
+                   <label for="name">ABV%</label>
+                   <input type="number" class="form-control" id="abv" name="abv" placeholder="ABV% of Beer">
+                 </div>
+                 <div class="form-group">
+                   <label for="name">Beer Name</label>
+                   <input type="text-area" class="form-control" id="description" name="description" placeholder="Short Description of Beer">
                  </div>
              </div>
              <div class="modal-footer">
-               <button id="signup" type="button" class="btn btn-primary">Sign Up!</button>
+               <button id="newbeer" type="button" class="btn btn-primary">Add Beer!</button>
              </div>
            </div><!-- /.modal-content -->
          </div><!-- /.modal-dialog -->
