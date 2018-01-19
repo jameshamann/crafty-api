@@ -37,7 +37,7 @@ if (cluster.isMaster) {
     var ddbbeerTable =  process.env.CRAFTY_BEERS_TABLE;
 
     var snsTopic =  process.env.NEW_SIGNUP_TOPIC;
-    var snsTopic =  process.env.NEW_BEER_TOPIC;
+    var snsBeerTopic =  process.env.NEW_BEER_TOPIC;
 
     var app = express();
 
@@ -130,7 +130,7 @@ if (cluster.isMaster) {
                                         + "\r\nABV: " + req.body.abv
                                         + "\r\nDescription: " + req.body.description,
                     'Subject': 'New Beer Added to Crafty API!',
-                    'TopicArn': snsTopic
+                    'TopicArn': snsBeerTopic
                 }, function(err, data) {
                     if (err) {
                         res.status(500).end();
