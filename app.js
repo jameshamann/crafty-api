@@ -73,7 +73,7 @@ if (cluster.isMaster) {
          S: "IPA"
         }
       },
-      TableName: "CRAFTY_BEER_TABLE"
+      TableName: "CraftyBeersTable"
      };
      ddb.getItem(params, function(err, data) {
        if (err) console.log(err, err.stack); // an error occurred
