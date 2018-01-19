@@ -54,7 +54,7 @@
       </div>
 
       <!-- Modal -->
-       <div class="modal fade" id="newBeerModal" tabindex="-1" role="dialog" aria-labelledby="newbeerModal" aria-hidden="true">
+       <div class="modal fade" id="newbeerModal" tabindex="-1" role="dialog" aria-labelledby="newbeerModal" aria-hidden="true">
          <div class="modal-dialog">
            <div class="modal-content">
              <div class="modal-header">
@@ -94,7 +94,7 @@
     <script src="<%= static_path + "/bootstrap/js/bootstrap.min.js" %>"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-      $("#newbeer").click(function() {
+      $("#newbeerModal").click(function() {
         $.post( "/beers", $("#newBeerForm").serialize(),
                 function(data) {
                   $("#beerSuccess").show();
