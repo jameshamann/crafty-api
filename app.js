@@ -34,6 +34,8 @@ if (cluster.isMaster) {
     var ddb = new AWS.DynamoDB();
 
     var ddbTable =  process.env.STARTUP_SIGNUP_TABLE;
+    var ddbbeerTable =  process.env.CRAFTY_BEERS_TABLE;
+
     var snsTopic =  process.env.NEW_SIGNUP_TOPIC;
     var app = express();
 
@@ -74,7 +76,47 @@ if (cluster.isMaster) {
                 console.log('DDB Error: ' + err);
             } else {
                 sns.publish({
-                    'Message': 'Name: ' + req.body.name + "\r\nEmail: " + req.body.email 
+                    'Message': 'Name: ' + req.body.name + "\r\nEmail: " + req.body.email
+                                        + "\r\nPreviewAccess: " + req.body.previewAccess,
+                    'Subject': 'New Crafty API User SignUp!',
+                    'TopicArn': snsTopic
+                }, function(err, data) {
+                    if (err) {
+                        res.status(500).end();
+                        console.log('SNS Error: ' + err);
+                    } else {
+                        res.status(201).end();
+                    }
+                });
+            }
+        });
+    });
+
+    app.post('/beers', function(req, res) {
+        var item = {
+            'email': {'S': req.body.email},
+            'name': {'S': req.body.name},
+            'preview': {'S': req.body.previewAccess},
+            'theme': {'S': req.body.theme}
+        };
+
+        ddb.putItem({
+            'TableName': ddbTable,
+            'Item': item,
+            'Expected': { email: { Exists: false } }
+        }, function(err, data) {
+            if (err) {
+                var returnStatus = 500;
+
+                if (err.code === 'ConditionalCheckFailedException') {
+                    returnStatus = 409;
+                }
+
+                res.status(returnStatus).end();
+                console.log('DDB Error: ' + err);
+            } else {
+                sns.publish({
+                    'Message': 'Name: ' + req.body.name + "\r\nEmail: " + req.body.email
                                         + "\r\nPreviewAccess: " + req.body.previewAccess,
                     'Subject': 'New Crafty API User SignUp!',
                     'TopicArn': snsTopic
