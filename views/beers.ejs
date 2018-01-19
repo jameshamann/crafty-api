@@ -94,7 +94,7 @@
     <script src="<%= static_path + "/bootstrap/js/bootstrap.min.js" %>"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-      $("#newbeerModal").click(function() {
+      $("#newbeer").click(function() {
         $.post( "/beers", $("#newBeerForm").serialize(),
                 function(data) {
                   $("#beerSuccess").show();
