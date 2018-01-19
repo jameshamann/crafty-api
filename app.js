@@ -60,6 +60,44 @@ if (cluster.isMaster) {
         });
     });
 
+    app.get('/api/beers/ipa', function(req, res) {
+
+      var beerType = req.url.slice(7)
+
+
+      console.log(beerType)
+
+      var params = {
+      Key: {
+       "type": {
+         S: "IPA"
+        }
+      },
+      TableName: "CRAFTY_BEER_TABLE"
+     };
+     ddb.getItem(params, function(err, data) {
+       if (err) console.log(err, err.stack); // an error occurred
+       else     console.log(data);           // successful response
+       /*
+       data = {
+        Item: {
+         "AlbumTitle": {
+           S: "Songs About Life"
+          },
+         "Artist": {
+           S: "Acme Band"
+          },
+         "SongTitle": {
+           S: "Happy Day"
+          }
+        }
+       }
+       */
+     });
+
+  })
+
+
 
     app.post('/signup', function(req, res) {
         var item = {
