@@ -74,7 +74,7 @@ if (cluster.isMaster) {
                 console.log('DDB Error: ' + err);
             } else {
                 sns.publish({
-                    'Message': 'Name: ' + req.body.name + "\r\nEmail: Crafy Devs"
+                    'Message': 'Name: ' + req.body.name + "\r\nEmail: " + req.body.email 
                                         + "\r\nPreviewAccess: " + req.body.previewAccess,
                     'Subject': 'New Crafty API User SignUp!',
                     'TopicArn': snsTopic
