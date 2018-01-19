@@ -2,7 +2,7 @@ version: 2
 
 branches:
   only:
-   - master # list of branches to build
+    - master # list of branches to build
 
 jobs:
   build:
