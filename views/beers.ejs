@@ -45,7 +45,7 @@
       <div class="jumbotron">
         <h1>Help us further grow our database of Beers!</h1>
         <p class="lead">Help us out in the meantime and add a beer below</p>
-        <p><a class="btn btn-lg btn-success"  data-toggle="modal" href="#signupModal">Add Beer</a></p>
+        <p><a class="btn btn-lg btn-success"  data-toggle="modal" href="#newbeerModal">Add Beer</a></p>
       </div>
 
 
@@ -54,7 +54,7 @@
       </div>
 
       <!-- Modal -->
-       <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModal" aria-hidden="true">
+       <div class="modal fade" id="newBeerModal" tabindex="-1" role="dialog" aria-labelledby="newbeerModal" aria-hidden="true">
          <div class="modal-dialog">
            <div class="modal-content">
              <div class="modal-header">
@@ -94,23 +94,23 @@
     <script src="<%= static_path + "/bootstrap/js/bootstrap.min.js" %>"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-      $("#signup").click(function() {
-        $.post( "/signup", $("#signupForm").serialize(),
+      $("#newbeer").click(function() {
+        $.post( "/beers", $("#newBeerForm").serialize(),
                 function(data) {
-                  $("#signupSuccess").show();
+                  $("#beerSuccess").show();
                 }
               )
               .error(function(xhr) {
                 switch(xhr.status) {
                   case 409:
-                    $("#signupDuplicate").show();
+                    $("#beerDuplicate").show();
                     break;
                   default:
-                    $("#signupError").show();
+                    $("#beerError").show();
                 }
               })
               .always(function() {
-                $("#signupModal").modal('hide');
+                $("#newbeerModal").modal('hide');
               });
       })
     })
