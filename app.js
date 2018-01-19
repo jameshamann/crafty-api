@@ -37,6 +37,8 @@ if (cluster.isMaster) {
     var ddbbeerTable =  process.env.CRAFTY_BEERS_TABLE;
 
     var snsTopic =  process.env.NEW_SIGNUP_TOPIC;
+    var snsTopic =  process.env.NEW_BEER_TOPIC;
+
     var app = express();
 
     app.set('view engine', 'ejs');
