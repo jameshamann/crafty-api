@@ -34,10 +34,9 @@ if (cluster.isMaster) {
     var ddb = new AWS.DynamoDB();
 
     var ddbTable =  process.env.STARTUP_SIGNUP_TABLE;
-    var ddbbeerTable =  process.env.CRAFTY_BEERS_TABLE;
+    var ddbbeerTable =  process.env.CRAFTY_BEER_TABLE;
 
     var snsTopic =  process.env.NEW_SIGNUP_TOPIC;
-    var snsBeerTopic =  process.env.NEW_BEER_TOPIC;
 
     var app = express();
 
@@ -125,22 +124,9 @@ if (cluster.isMaster) {
                 res.status(returnStatus).end();
                 console.log('DDB Error: ' + err);
             } else {
-                sns.publish({
-                    'Message': 'Type: ' + req.body.type + "\r\nName: " + req.body.name
-                                        + "\r\nABV: " + req.body.abv
-                                        + "\r\nDescription: " + req.body.description,
-                    'Subject': 'New Beer Added to Crafty API!',
-                    'TopicArn': snsBeerTopic
-                }, function(err, data) {
-                    if (err) {
-                        res.status(500).end();
-                        console.log('SNS Error: ' + err);
-                    } else {
-                        res.status(201).end();
-                    }
-                });
+                console.log('Success')
             }
-        });
+        })
     });
 
     var port = process.env.PORT || 3000;
