@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon app.js",
     "ci-start": "node server.js",
     "test": "cd dynamodb && newman run CraftyAPI_Tests.json && cd ..",
     "create-db": "cd dynamodb && node createBeersTable.js && cd ..",
@@ -16,6 +16,7 @@
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "ejs": "^2.5.7",
     "express": "~4.15.5",
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
