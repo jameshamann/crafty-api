@@ -38,6 +38,9 @@ if (cluster.isMaster) {
 
     var snsTopic =  process.env.NEW_SIGNUP_TOPIC;
 
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+
     var app = express();
 
     app.set('view engine', 'ejs');
@@ -63,20 +66,23 @@ if (cluster.isMaster) {
     app.get('/api/beers', function(req, res) {
 
     var params = {
-     TableName: 'awseb-e-qdxmn65fxj-stack-CraftyBeersTable-IX1X2Z526EB2'
+      Key: {
+        hashkey: 'type',
+      },
+      TableName: 'awseb-e-qdxmn65fxj-stack-CraftyBeersTable-IX1X2Z526EB2'
     };
 
-    ddb.scan(params, function(err, data) {
+    docClient.scan(params, function(err, data) {
       if (err) {
         console.log("Error", err);
       } else {
-        //console.log("Success", data.Items);
+        console.log("Success", data.Items);
+        res.send(data.Items)
         data.Items.forEach(function(element, index, array) {
-          console.log(element.type.S + " (" + element.name.S + " " + element.abv.N + "%" + ")");
+          console.log(element.type + " (" + element.name + " " + element.abv + "%" + ")");
         });
       }
     });
-    res.send({title:'Hello'})
 
   })
 
