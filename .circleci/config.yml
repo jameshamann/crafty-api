@@ -1,13 +1,15 @@
 version: 2
 
-branches:
-    only:
-     - master # list of branches to build
+
 
 jobs:
   build:
     docker:
       - image: circleci/node
+
+    branches:
+      only:
+       - master # list of branches to build
 
     working_directory: ~/repo
 

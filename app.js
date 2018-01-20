@@ -38,6 +38,9 @@ if (cluster.isMaster) {
 
     var snsTopic =  process.env.NEW_SIGNUP_TOPIC;
 
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+
     var app = express();
 
     app.set('view engine', 'ejs');
@@ -59,6 +62,30 @@ if (cluster.isMaster) {
             flask_debug: process.env.FLASK_DEBUG || 'false'
         });
     });
+
+    app.get('/api/beers', function(req, res) {
+
+    var params = {
+      Key: {
+        hashkey: 'type',
+      },
+      TableName: 'awseb-e-qdxmn65fxj-stack-CraftyBeersTable-IX1X2Z526EB2'
+    };
+
+    docClient.scan(params, function(err, data) {
+      if (err) {
+        console.log("Error", err);
+      } else {
+        console.log("Success", data.Items);
+        res.send(data.Items)
+        data.Items.forEach(function(element, index, array) {
+          console.log(element.type + " (" + element.name + " " + element.abv + "%" + ")");
+        });
+      }
+    });
+
+  })
+
 
 
     app.post('/signup', function(req, res) {
