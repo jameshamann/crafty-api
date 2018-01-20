@@ -60,43 +60,23 @@ if (cluster.isMaster) {
         });
     });
 
-    app.get('/api/beers/ipa', function(req, res) {
+    app.get('/api/beers', function(req, res) {
 
-      var beerType = req.url.slice(7)
+    var params = {
+     TableName: 'awseb-e-qdxmn65fxj-stack-CraftyBeersTable-IX1X2Z526EB2'
+    };
 
-
-      console.log(beerType)
-
-      var params = {
-      Key: {
-       "type": {
-         S: "IPA"
-        }
-      },
-      TableName: "CraftyBeersTable"
-     };
-     ddb.getItem(params, function(err, data) {
-       if (err) console.log(err, err.stack); // an error occurred
-       else   {
-         console.log(data);
-         res.send(data)
-       }            // successful response
-       /*
-       data = {
-        Item: {
-         "AlbumTitle": {
-           S: "Songs About Life"
-          },
-         "Artist": {
-           S: "Acme Band"
-          },
-         "SongTitle": {
-           S: "Happy Day"
-          }
-        }
-       }
-       */
-     });
+    ddb.scan(params, function(err, data) {
+      if (err) {
+        console.log("Error", err);
+      } else {
+        //console.log("Success", data.Items);
+        data.Items.forEach(function(element, index, array) {
+          console.log(element.type.S + " (" + element.name.S + " " + element.abv.N + "%" + ")");
+        });
+      }
+    });
+    res.send({title:'Hello'})
 
   })
 
