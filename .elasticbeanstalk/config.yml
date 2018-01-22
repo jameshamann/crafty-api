@@ -1,6 +1,6 @@
 branch-defaults:
   master:
-    environment: crafty-staging
+    environment: craftyapp-staging
 environment-defaults:
   crafty-staging:
     branch: null

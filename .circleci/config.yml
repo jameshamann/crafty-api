@@ -73,4 +73,4 @@ jobs:
                     64bit Amazon Linux/4.4.3'
       - run:
           name: Deploy to AWS Elastic Beanstalk
-          command: 'eb deploy crafty-staging'
+          command: 'eb deploy craftyapp-staging'
