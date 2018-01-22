@@ -139,38 +139,33 @@ if (cluster.isMaster) {
 
 
     app.post('/beers', function(req, res) {
-        var item = {
-            'ID': {'N': req.body.ID},
-            'type': {'S': req.body.type},
-            'name': {'S': req.body.name},
-            'abv': {'N': req.body.abv},
-            'description': {'S': req.body.description}
-        };
+         var item = {
+             'ID': {'S': req.body.uuid},
+             'type': {'S': req.body.type},
+             'name': {'S': req.body.name},
+             'abv': {'N': req.body.abv},
+             'description': {'S': req.body.description}
+         };
 
-        console.log(req)
+         ddb.putItem({
+             'TableName': ddbbeerTable,
+             'Item': item,
+             'Expected': { type: { Exists: false } }
+         }, function(err, data) {
+             if (err) {
+                 var returnStatus = 500;
 
-        ddb.putItem({
-            'TableName': ddbbeerTable,
-            'Item': item,
-            'Expected': { ID: { Exists: false } }
-        }, function(err, data) {
-            if (err) {
-                var returnStatus = 500;
-                console.log(err)
+                 if (err.code === 'ConditionalCheckFailedException') {
+                     returnStatus = 409;
+                 }
 
-                if (err.code === 'ConditionalCheckFailedException') {
-                    returnStatus = 409;
-                }
-
-                console.log(res)
-
-                res.status(returnStatus).end();
-                console.log('DDB Error: ' + err);
-            } else {
-                console.log('Success')
-            }
-        })
-    });
+                 res.status(returnStatus).end();
+                 console.log('DDB Error: ' + err);
+             } else {
+                 console.log('Success')
+             }
+         })
+     });
 
     var port = process.env.PORT || 3000;
 
