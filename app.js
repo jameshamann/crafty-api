@@ -138,7 +138,7 @@ if (cluster.isMaster) {
     });
 
 
-    app.post('/api/beers', function(req, res) {
+    app.post('https://wpv4fuvlu6.execute-api.eu-west-2.amazonaws.com/beta/beers', function(req, res) {
         var item = {
             'type': {'S': req.body.type},
             'name': {'S': req.body.name},

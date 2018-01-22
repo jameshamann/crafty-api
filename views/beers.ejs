@@ -92,7 +92,7 @@
     <script type="text/javascript">
     $(document).ready(function() {
       $("#newbeer").click(function() {
-        $.post( "/api/beers", $("#newBeerForm").serialize(),
+        $.post("https://wpv4fuvlu6.execute-api.eu-west-2.amazonaws.com/beta/beers", $("#newBeerForm").serialize(),
                 function(data) {
                   $("#beerSuccess").show();
                 }
