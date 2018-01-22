@@ -78,7 +78,7 @@ if (cluster.isMaster) {
       Key: {
         hashkey: 'type',
       },
-      TableName: 'CraftyBeersTable'
+      TableName: 'awseb-e-mcqqphcgry-stack-CraftyBeersTable-18E5PIVERQWP0'
     };
 
     docClient.scan(params, function(err, data) {
@@ -148,7 +148,7 @@ if (cluster.isMaster) {
         };
 
         ddb.putItem({
-            'TableName': 'CraftyBeersTable',
+            'TableName': 'awseb-e-mcqqphcgry-stack-CraftyBeersTable-18E5PIVERQWP0',
             'Item': item,
             'Expected': { type: { Exists: false } }
         }, function(err, data) {
