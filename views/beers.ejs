@@ -92,7 +92,7 @@
     <script type="text/javascript">
     $(document).ready(function() {
       $("#newbeer").click(function() {
-        $.post( "/beers", $("#newBeerForm").serialize(),
+        $.post( "/api/beers", $("#newBeerForm").serialize(),
                 function(data) {
                   $("#beerSuccess").show();
                 }
