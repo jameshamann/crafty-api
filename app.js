@@ -150,7 +150,7 @@ if (cluster.isMaster) {
         console.log(req)
 
         ddb.putItem({
-            'TableName': 'awseb-e-mcqqphcgry-stack-CraftyBeersTable-18E5PIVERQWP0',
+            'TableName': ddbbeerTable,
             'Item': item,
             'Expected': { type: { Exists: false } }
         }, function(err, data) {
