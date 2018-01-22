@@ -142,7 +142,9 @@ if (cluster.isMaster) {
             'type': {'S': req.body.type},
             'name': {'S': req.body.name},
             'abv': {'N': req.body.abv},
-            'description': {'S': req.body.description}
+            'description': {'S': req.body.description},
+            'long_type': {'S': req.body.long_type}
+
         };
 
         ddb.putItem({
