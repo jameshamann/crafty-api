@@ -136,9 +136,9 @@ if (cluster.isMaster) {
             }
         });
     });
-    
 
-    app.post('/beers', function(req, res) {
+
+    app.post('/api/beers', function(req, res) {
         var item = {
             'type': {'S': req.body.type},
             'name': {'S': req.body.name},
@@ -147,12 +147,13 @@ if (cluster.isMaster) {
         };
 
         ddb.putItem({
-            'TableName': ddbbeerTable,
+            'TableName': 'awseb-e-qdxmn65fxj-stack-CraftyBeersTable-IX1X2Z526EB2',
             'Item': item,
             'Expected': { type: { Exists: false } }
         }, function(err, data) {
             if (err) {
                 var returnStatus = 500;
+                console.log(err)
 
                 if (err.code === 'ConditionalCheckFailedException') {
                     returnStatus = 409;
