@@ -21,8 +21,8 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="/">Home</a></li>
-          <li><a href="/beers">Add Beers</a></li>
+          <li><a href="/">Home</a></li>
+          <li class="active"><a href="/beers">Add Beers</a></li>
         </ul>
       </div>
 	  <% if (flask_debug === 'true') { %>
@@ -40,9 +40,8 @@
         <p id="signupErrorText">Well this is embarrassing. It looks like we're having trouble getting you on the list.</p>
       </div>
       <div class="jumbotron">
-        <h1>The next big thing is coming...</h1>
-        <p class="lead">We're pretty thrilled to unveil our latest creation. Sign up below to be notified when we officially launch!</p>
-        <p><a class="btn btn-lg btn-success"  data-toggle="modal" href="#signupModal">Sign up today</a></p>
+        <p class="lead">Add to our evergrowing database of beers!</p>
+        <p><a class="btn btn-lg btn-success"  data-toggle="modal" href="#signupModal">Add beers!</a></p>
       </div>
 
 
@@ -66,14 +65,29 @@
                    <input type="text" class="form-control" id="uid" name="uid" placeholder="ID Number">
                  </div>
                  <div class="form-group">
+                   <label for="name">Name of Beer</label>
+                   <input type="text" class="form-control" id="name" name="name" placeholder="Name of Beer">
+                 </div>
+                 <div class="form-group">
                    <label for="type">Type</label>
                    <input type="text" class="form-control" id="type" name="type" placeholder="Type of Beer">
                  </div>
                  <div class="form-group">
-                   <label for="name">Name</label>
-                   <input type="text" class="form-control" id="name" name="name" placeholder="Name of Beer">
+                   <label for="type">Long Type</label>
+                   <input type="text" class="form-control" id="long_type" name="long_type" placeholder="Long Type of Beer">
                  </div>
-
+                 <div class="form-group">
+                   <label for="type">ABV%</label>
+                   <input type="number" class="form-control" id="abv" name="abv" placeholder="ABV% of Beer">
+                 </div>
+                 <div class="form-group">
+                   <label for="type">Brewery</label>
+                   <input type="text" class="form-control" id="brewery" name="brewery" placeholder="Brewery">
+                 </div>
+                 <div class="form-group">
+                   <label for="name">Short Description</label>
+                   <input type="text" class="form-control" id="description" name="description" placeholder="Short description of Beer">
+                 </div>
              </div>
              <div class="modal-footer">
                <button id="newbeer" type="button" class="btn btn-primary">Add Beer!</button>
