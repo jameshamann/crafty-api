@@ -138,7 +138,7 @@ if (cluster.isMaster) {
     });
 
 
-    app.post('/api/beers', function(req, res) {
+    app.post('/beers', function(req, res) {
         var item = {
             'type': {'S': req.body.type},
             'name': {'S': req.body.name},
