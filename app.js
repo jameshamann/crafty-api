@@ -140,7 +140,7 @@ if (cluster.isMaster) {
 
     app.post('/beers', function(req, res) {
         var item = {
-            'id': {'N': req.body.uid},
+            'ID': {'N': req.body.uid},
             'type': {'S': req.body.type},
             'name': {'S': req.body.name},
         };
@@ -148,7 +148,7 @@ if (cluster.isMaster) {
         ddb.putItem({
             'TableName': ddbbeerTable,
             'Item': item,
-            'Expected': { id: { Exists: false } }
+            'Expected': { ID: { Exists: false } }
         }, function(err, data) {
             if (err) {
                 var returnStatus = 500;
