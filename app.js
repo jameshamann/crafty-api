@@ -152,7 +152,7 @@ if (cluster.isMaster) {
         ddb.putItem({
             'TableName': ddbbeerTable,
             'Item': item,
-            'Expected': { type: { Exists: false } }
+            'Expected': { ID: { Exists: false } }
         }, function(err, data) {
             if (err) {
                 var returnStatus = 500;
