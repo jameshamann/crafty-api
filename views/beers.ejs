@@ -60,12 +60,11 @@
              </div>
              <div class="modal-body">
                <form id="newBeerForm" role="form">
-                 <input type="hidden" id="theme" name="theme" value="<%= theme %>"/>
-                 <div class="form-group">
                    <div class="form-group">
                      <label for="name">ID</label>
-                     <input type="number" class="form-control" id="id" name="id" placeholder="ID Number">
+                     <input type="number" class="form-control" id="ID" name="ID" placeholder="ID Number">
                    </div>
+                  <div class="form-group">
                    <label for="type">Type of Beer</label>
                    <input type="text" class="form-control" id="type" name="type" placeholder="Type of Beer">
                  </div>
@@ -96,7 +95,7 @@
     <script type="text/javascript">
     $(document).ready(function() {
       $("#newbeer").click(function() {
-        $.post("/beers", $("#newBeerForm").serialize(),
+        $.post( "/beers", $("#newBeerForm").serialize(),
                 function(data) {
                   $("#beerSuccess").show();
                 }
