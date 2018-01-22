@@ -27,6 +27,7 @@ if (cluster.isMaster) {
     var AWS = require('aws-sdk');
     var express = require('express');
     var bodyParser = require('body-parser');
+    var cors = require('cors')
 
     AWS.config.region = process.env.REGION
 
@@ -42,6 +43,8 @@ if (cluster.isMaster) {
 
 
     var app = express();
+
+    app.use(cors())
 
     app.set('view engine', 'ejs');
     app.set('views', __dirname + '/views');
