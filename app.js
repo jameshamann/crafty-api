@@ -139,34 +139,29 @@ if (cluster.isMaster) {
 
 
     app.post('/beers', function(req, res) {
-         var item = {
-             'ID': {'S': req.body.uuid},
-             'type': {'S': req.body.type},
-             'name': {'S': req.body.name},
-             'abv': {'N': req.body.abv},
-             'description': {'S': req.body.description}
-         };
+        var item = {
+            'id': {'N': req.body.uid},
+            'type': {'S': req.body.type},
+            'name': {'S': req.body.name},
+        };
 
-         ddb.putItem({
-             'TableName': ddbbeerTable,
-             'Item': item,
-             'Expected': { ID: { Exists: false } }
-         }, function(err, data) {
-             if (err) {
-                 var returnStatus = 500;
+        ddb.putItem({
+            'TableName': ddbbeerTable,
+            'Item': item,
+            'Expected': { id: { Exists: false } }
+        }, function(err, data) {
+            if (err) {
+                var returnStatus = 500;
 
-                 if (err.code === 'ConditionalCheckFailedException') {
-                     returnStatus = 409;
-                 }
+                if (err.code === 'ConditionalCheckFailedException') {
+                    returnStatus = 409;
+                }
 
-                 res.status(returnStatus).end();
-                 console.log('DDB Error: ' + err);
-             } else {
-                 console.log('Success')
-             }
-         })
-     });
-
+                res.status(returnStatus).end();
+                console.log('DDB Error: ' + err);
+            }
+        })
+    })
     var port = process.env.PORT || 3000;
 
     var server = app.listen(port, function () {
