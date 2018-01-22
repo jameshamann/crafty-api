@@ -140,12 +140,14 @@ if (cluster.isMaster) {
 
     app.post('/beers', function(req, res) {
         var item = {
-            'id': {'N': req.body.id},
+            'ID': {'N': req.body.id},
             'type': {'S': req.body.type},
             'name': {'S': req.body.name},
             'abv': {'N': req.body.abv},
             'description': {'S': req.body.description}
         };
+
+        console.log(req)
 
         ddb.putItem({
             'TableName': 'awseb-e-mcqqphcgry-stack-CraftyBeersTable-18E5PIVERQWP0',
@@ -159,6 +161,8 @@ if (cluster.isMaster) {
                 if (err.code === 'ConditionalCheckFailedException') {
                     returnStatus = 409;
                 }
+
+                console.log(res)
 
                 res.status(returnStatus).end();
                 console.log('DDB Error: ' + err);
