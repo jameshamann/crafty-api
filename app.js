@@ -72,7 +72,7 @@ if (cluster.isMaster) {
         });
     });
 
-    app.get('https://craftyapi.jameshamann.com/api/beers', function(req, res) {
+    app.get('/api/beers', function(req, res) {
 
     var params = {
       Key: {
@@ -138,7 +138,7 @@ if (cluster.isMaster) {
     });
 
 
-    app.post('https://craftyapi.jameshamann.com/api/beers', function(req, res) {
+    app.post('/api/beers', function(req, res) {
         var item = {
             'type': {'S': req.body.type},
             'name': {'S': req.body.name},
