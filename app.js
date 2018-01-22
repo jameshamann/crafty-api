@@ -140,6 +140,7 @@ if (cluster.isMaster) {
 
     app.post('/beers', function(req, res) {
         var item = {
+            'id': {'N': req.body.id},
             'type': {'S': req.body.type},
             'name': {'S': req.body.name},
             'abv': {'N': req.body.abv},
