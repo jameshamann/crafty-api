@@ -29,6 +29,9 @@ if (cluster.isMaster) {
     var bodyParser = require('body-parser');
     var cors = require('cors')
 
+    var uuidv1 = require('uuid/v1');
+
+
     AWS.config.region = process.env.REGION
 
     var sns = new AWS.SNS();
@@ -58,6 +61,8 @@ if (cluster.isMaster) {
     app.use(bodyParser.urlencoded({extended:false}));
 
     app.get('/', function(req, res) {
+      console.log(uuidv1())
+
         res.render('index', {
             static_path: 'static',
             theme: process.env.THEME || 'flatly',
