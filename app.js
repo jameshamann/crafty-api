@@ -150,17 +150,16 @@ if (cluster.isMaster) {
 
     app.post('/beers', function(req, res) {
         var item = {
-            'ID': {'N': req.body.uid},
+            'ID': {'N': req.body.uuid},
             'type': {'S': req.body.type},
             'name': {'S': req.body.name},
             'long_type': {'S': req.body.long_type},
             'abv': {'N': req.body.abv},
             'brewery': {'S': req.body.brewery},
-            'description': {'S': req.body.description},
-            'created_at': {'S': req.body.date},
-            'uuid': {'S': req.body.uuid}
-        };
+            'description': {'S': req.body.description}
+          };
 
+          
         ddb.putItem({
             'TableName': ddbbeerTable,
             'Item': item,
