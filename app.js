@@ -62,7 +62,9 @@ if (cluster.isMaster) {
         res.render('index', {
             static_path: 'static',
             theme: process.env.THEME || 'flatly',
-            flask_debug: process.env.FLASK_DEBUG || 'false'
+            flask_debug: process.env.FLASK_DEBUG || 'false',
+            uuid: uuidv1();
+
         });
     });
 
@@ -71,6 +73,8 @@ if (cluster.isMaster) {
             static_path: 'static',
             theme: process.env.THEME || 'flatly',
             flask_debug: process.env.FLASK_DEBUG || 'false',
+            uuid: uuidv1();
+
         });
     });
 
@@ -142,7 +146,7 @@ if (cluster.isMaster) {
 
     app.post('/beers', function(req, res) {
         var item = {
-            'ID': {'N': uuidv1()},
+            'ID': {'N': req.body.uuid},
             'type': {'S': req.body.type},
             'name': {'S': req.body.name},
             'long_type': {'S': req.body.long_type},
