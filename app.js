@@ -44,7 +44,6 @@ if (cluster.isMaster) {
 
     var app = express();
 
-    var uuidv1 = require('uuid/v1');
 
     app.use(cors())
 
@@ -59,21 +58,17 @@ if (cluster.isMaster) {
     app.use(bodyParser.urlencoded({extended:false}));
 
     app.get('/', function(req, res) {
-        var uuid = uuidv1();
         res.render('index', {
             static_path: 'static',
             theme: process.env.THEME || 'flatly',
-            uuid: uuid,
             flask_debug: process.env.FLASK_DEBUG || 'false'
         });
     });
 
     app.get('/beers', function(req, res) {
-        var uuid = uuidv1();
         res.render('beers', {
             static_path: 'static',
             theme: process.env.THEME || 'flatly',
-            uuid: uuid,
             flask_debug: process.env.FLASK_DEBUG || 'false'
         });
     });
@@ -154,11 +149,6 @@ if (cluster.isMaster) {
             'brewery': {'S': req.body.brewery},
             'description': {'S': req.body.description},
             'created_at': {'S': req.body.date},
-            'uuid': {'N': req.body.uuid}
-
-
-
-
         };
 
         ddb.putItem({
