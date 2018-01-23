@@ -63,7 +63,7 @@ if (cluster.isMaster) {
             static_path: 'static',
             theme: process.env.THEME || 'flatly',
             flask_debug: process.env.FLASK_DEBUG || 'false',
-            uuid: uuidv1();
+            uuid: uuidv1()
 
         });
     });
@@ -73,7 +73,7 @@ if (cluster.isMaster) {
             static_path: 'static',
             theme: process.env.THEME || 'flatly',
             flask_debug: process.env.FLASK_DEBUG || 'false',
-            uuid: uuidv1();
+            uuid: uuidv1()
 
         });
     });
