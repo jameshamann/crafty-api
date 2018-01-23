@@ -29,6 +29,9 @@ if (cluster.isMaster) {
     var bodyParser = require('body-parser');
     var cors = require('cors')
 
+    var uuid = require('node-uuid');
+
+
     AWS.config.region = process.env.REGION
 
     var sns = new AWS.SNS();
@@ -58,17 +61,23 @@ if (cluster.isMaster) {
     app.use(bodyParser.urlencoded({extended:false}));
 
     app.get('/', function(req, res) {
+      var uuid_current = uuid.v1();
+
         res.render('index', {
             static_path: 'static',
             theme: process.env.THEME || 'flatly',
+            uuid: uuid_current,
             flask_debug: process.env.FLASK_DEBUG || 'false'
         });
     });
 
     app.get('/beers', function(req, res) {
+      var uuid_current = uuid.v1();
+
         res.render('beers', {
             static_path: 'static',
             theme: process.env.THEME || 'flatly',
+            uuid: uuid_current,
             flask_debug: process.env.FLASK_DEBUG || 'false'
         });
     });
@@ -141,15 +150,15 @@ if (cluster.isMaster) {
 
     app.post('/beers', function(req, res) {
         var item = {
-            'ID': {'N': req.body.uid},
+            'ID': {'S': req.body.uuid},
             'type': {'S': req.body.type},
             'name': {'S': req.body.name},
             'long_type': {'S': req.body.long_type},
             'abv': {'N': req.body.abv},
             'brewery': {'S': req.body.brewery},
-            'description': {'S': req.body.description},
-            'created_at': {'S': req.body.date},
-        };
+            'description': {'S': req.body.description}
+          };
+
 
         ddb.putItem({
             'TableName': ddbbeerTable,
