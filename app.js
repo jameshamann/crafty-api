@@ -158,6 +158,7 @@ if (cluster.isMaster) {
             'brewery': {'S': req.body.brewery},
             'description': {'S': req.body.description},
             'created_at': {'S': req.body.date},
+            'uuid': {'S': req.body.uuid}
         };
 
         ddb.putItem({
