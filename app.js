@@ -88,7 +88,7 @@ if (cluster.isMaster) {
       Key: {
         hashkey: 'type',
       },
-      TableName: 'awseb-e-mcqqphcgry-stack-CraftyBeersTable-18E5PIVERQWP0'
+      TableName: 'awseb-e-mcqqphcgry-stack-CraftyBeersTable-1IEZA65VF1WX2'
     };
 
     docClient.scan(params, function(err, data) {
