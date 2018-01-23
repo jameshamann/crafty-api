@@ -61,7 +61,7 @@
                <form id="signupForm" role="form">
                  <input type="hidden" id="theme" name="theme" value="<%= theme %>"/>
                  <div class="form-group">
-                   <input type="hidden" id="date" name="date" value="<%= new Date(year, month, day, hours, minutes, seconds) %>"/>
+                   <input type="hidden" id="date" name="date" value="<%= date = new Date(); %>"/>
                    <label for="name">ID</label>
                    <input type="text" class="form-control" id="uid" name="uid" placeholder="ID Number">
                  </div>
