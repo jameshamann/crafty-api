@@ -1490,6 +1490,10 @@ uuid@3.1.0, uuid@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 
+uuid@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.2.1.tgz#12c528bb9d58d0b9265d9a2f6f0fe8be17ff1f14"
+
 uvm@1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/uvm/-/uvm-1.7.0.tgz#685d3a149ec7118fb73a73dfdc158ab46b0f0634"
