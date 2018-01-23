@@ -29,7 +29,7 @@ if (cluster.isMaster) {
     var bodyParser = require('body-parser');
     var cors = require('cors')
 
-    var uuidv1 = require('uuid/v1');
+    var uuid = require('node-uuid');
 
 
     AWS.config.region = process.env.REGION
@@ -61,7 +61,7 @@ if (cluster.isMaster) {
     app.use(bodyParser.urlencoded({extended:false}));
 
     app.get('/', function(req, res) {
-      console.log(uuidv1())
+      console.log(uuid.v1())
 
         res.render('index', {
             static_path: 'static',
