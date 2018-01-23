@@ -150,7 +150,7 @@ if (cluster.isMaster) {
 
     app.post('/beers', function(req, res) {
         var item = {
-            'ID': {'N': req.body.uuid},
+            'ID': {'S': req.body.uuid},
             'type': {'S': req.body.type},
             'name': {'S': req.body.name},
             'long_type': {'S': req.body.long_type},
@@ -159,7 +159,7 @@ if (cluster.isMaster) {
             'description': {'S': req.body.description}
           };
 
-          
+
         ddb.putItem({
             'TableName': ddbbeerTable,
             'Item': item,
