@@ -153,7 +153,6 @@ if (cluster.isMaster) {
             'ID': {'S': req.body.uuid},
             'type': {'S': req.body.type},
             'name': {'S': req.body.name},
-            'long_type': {'S': req.body.long_type},
             'abv': {'N': req.body.abv},
             'brewery': {'S': req.body.brewery},
             'description': {'S': req.body.description}
