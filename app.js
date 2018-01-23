@@ -44,7 +44,7 @@ if (cluster.isMaster) {
 
     var app = express();
 
-    const uuidv1 = require('uuid/v1');
+    var uuidv1 = require('uuid/v1');
 
     app.use(cors())
 
@@ -62,9 +62,7 @@ if (cluster.isMaster) {
         res.render('index', {
             static_path: 'static',
             theme: process.env.THEME || 'flatly',
-            flask_debug: process.env.FLASK_DEBUG || 'false',
-            uuid: uuidv1()
-
+            flask_debug: process.env.FLASK_DEBUG || 'false'
         });
     });
 
@@ -72,9 +70,7 @@ if (cluster.isMaster) {
         res.render('beers', {
             static_path: 'static',
             theme: process.env.THEME || 'flatly',
-            flask_debug: process.env.FLASK_DEBUG || 'false',
-            uuid: uuidv1()
-
+            flask_debug: process.env.FLASK_DEBUG || 'false'
         });
     });
 
@@ -146,13 +142,15 @@ if (cluster.isMaster) {
 
     app.post('/beers', function(req, res) {
         var item = {
-            'ID': {'N': req.body.uuid},
+            'ID': {'N': req.body.uid},
             'type': {'S': req.body.type},
             'name': {'S': req.body.name},
             'long_type': {'S': req.body.long_type},
             'abv': {'N': req.body.abv},
             'brewery': {'S': req.body.brewery},
-            'description': {'S': req.body.description}
+            'description': {'S': req.body.description},
+            'created_at': {'S': req.body.date},
+
 
 
         };
