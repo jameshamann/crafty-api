@@ -147,6 +147,8 @@ if (cluster.isMaster) {
             'abv': {'N': req.body.abv},
             'brewery': {'S': req.body.brewery},
             'description': {'S': req.body.description},
+            'created_at': {'S': req.body.date},
+
 
 
         };
