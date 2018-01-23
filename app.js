@@ -61,19 +61,23 @@ if (cluster.isMaster) {
     app.use(bodyParser.urlencoded({extended:false}));
 
     app.get('/', function(req, res) {
-      console.log(uuid.v1())
+      var uuid_current = uuid.v1();
 
         res.render('index', {
             static_path: 'static',
             theme: process.env.THEME || 'flatly',
+            uuid: uuid_current,
             flask_debug: process.env.FLASK_DEBUG || 'false'
         });
     });
 
     app.get('/beers', function(req, res) {
+      var uuid_current = uuid.v1();
+
         res.render('beers', {
             static_path: 'static',
             theme: process.env.THEME || 'flatly',
+            uuid: uuid_current,
             flask_debug: process.env.FLASK_DEBUG || 'false'
         });
     });
