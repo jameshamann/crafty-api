@@ -118,7 +118,7 @@ if (cluster.isMaster) {
             if (err) {
                 console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
             } else {
-                console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
+                console.log("GetItem succeeded:", data);
                 res.send(data)
             }
         });
