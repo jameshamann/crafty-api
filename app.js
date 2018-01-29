@@ -85,9 +85,6 @@ if (cluster.isMaster) {
     app.get('/api/beers', function(req, res) {
 
     var params = {
-      Key: {
-        hashkey: 'type',
-      },
       TableName: 'awseb-e-mcqqphcgry-stack-CraftyBeersTable-1IEZA65VF1WX2'
     };
 
@@ -104,6 +101,29 @@ if (cluster.isMaster) {
     });
 
   })
+
+
+      app.get('/api/beers/:id', function(req, res) {
+        console.log(req.url)
+        var beerID = req.url.slice(11);
+        console.log(beerID)
+        var params = {
+          TableName : 'awseb-e-mcqqphcgry-stack-CraftyBeersTable-1IEZA65VF1WX2',
+          Key: {
+            ID: beerID
+          }
+        };
+
+        docClient.get(params, function(err, data) {
+            if (err) {
+                console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+            } else {
+                console.log("GetItem succeeded:", data);
+                res.send(data)
+            }
+        });
+
+    })
 
 
 
