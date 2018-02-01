@@ -125,6 +125,36 @@ if (cluster.isMaster) {
 
     })
 
+    app.get('/api/:name', function(req, res) {
+      console.log(req.url)
+      var beerName = req.url.slice(11).replace("%20", " ");
+      console.log(beerName)
+        var params = {
+          TableName : "awseb-e-mcqqphcgry-stack-CraftyBeersTable-1IEZA65VF1WX2",
+          KeyConditionExpression: "#name = :name",
+          ExpressionAttributeNames:{
+              "#name": "name"
+          },
+          ExpressionAttributeValues: {
+              ":name": beerName
+          }
+      };
+
+
+  docClient.query(params, function(err, data) {
+      if (err) {
+          console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+      } else {
+          console.log("Query succeeded.");
+          res.send(data.Items)
+          data.Items.forEach(function(beer) {
+              console.log(beer.ID, beer.name, beer.type);
+          });
+      }
+    })
+
+  });
+
 
 
     app.post('/signup', function(req, res) {
