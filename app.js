@@ -84,56 +84,15 @@ if (cluster.isMaster) {
 
     app.get('/api/beers', function(req, res) {
 
-    var params = {
-      TableName: 'awseb-e-mcqqphcgry-stack-CraftyBeersTable-1IEZA65VF1WX2'
-    };
-
-    docClient.scan(params, function(err, data) {
-      if (err) {
-        console.log("Error", err);
-      } else {
-        console.log("Success", data.Items);
-        res.send(data.Items)
-        data.Items.forEach(function(element, index, array) {
-          console.log(element.type + " (" + element.name + " " + element.abv + "%" + ")");
-        });
-      }
-    });
-
-  })
-
-
-      app.get('/api/beers/id=:id', function(req, res) {
-        console.log(req.url)
-        var beerID = req.url.slice(14);
-        console.log(beerID)
-        var params = {
-          TableName : 'awseb-e-mcqqphcgry-stack-CraftyBeersTable-1IEZA65VF1WX2',
-          Key: {
-            ID: beerID
-          }
-        };
-
-        docClient.get(params, function(err, data) {
-            if (err) {
-                console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-            } else {
-                console.log("GetItem succeeded:", data);
-                res.send(data)
-            }
-        });
-
-    })
-
-    app.get('/api/beers/name=:name', function(req, res) {
-
+      console.log(req.url.any)
       function toTitleCase(str)
       {
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
       }
 
+
       var rawRequest = req.url.slice(16);
-      console.log(rawRequest)
+      console.log(rawRequest  )
       var captalizedRequest = toTitleCase(rawRequest)
       var beerName = decodeURI(captalizedRequest)
       console.log(beerName)
@@ -164,8 +123,28 @@ if (cluster.isMaster) {
           });
         }
       });
+
     });
 
+    app.get('/api/beers/all', function(req, res) {
+
+
+      var params = {
+        TableName:  "awseb-e-mcqqphcgry-stack-CraftyBeersTable-1IEZA65VF1WX2",
+      };
+      docClient.scan(params, function(err, data) {
+        if (err) {
+          console.log("Error", err);
+        } else {
+          console.log("Success", data.Items);
+          res.send(data.Items)
+          data.Items.forEach(function(element, index, array) {
+            console.log(element.type + " (" + element.name + " " + element.abv + "%" + ")");
+          });
+        }
+      });
+
+    });
 
 
     app.post('/signup', function(req, res) {
