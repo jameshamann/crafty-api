@@ -126,9 +126,15 @@ if (cluster.isMaster) {
     })
 
     app.get('/api/beers/name=:name', function(req, res) {
+      function toTitleCase(str)
+      {
+        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+      }
+
       var beerName = req.url.slice(16);
       console.log(beerName)
 
+      console.log(toTitleCase(beerName))
 
       var params = {
         TableName:  "awseb-e-mcqqphcgry-stack-CraftyBeersTable-1IEZA65VF1WX2",
@@ -143,7 +149,7 @@ if (cluster.isMaster) {
         },
         FilterExpression: "#name = :name",
         ExpressionAttributeValues: {
-          ":name": beerName,
+          ":name": toTitleCase(beerName),
         }
       };
       docClient.scan(params, function(err, data) {
