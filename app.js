@@ -103,9 +103,9 @@ if (cluster.isMaster) {
   })
 
 
-      app.get('/api/beers/:id', function(req, res) {
+      app.get('/api/beers/id=:id', function(req, res) {
         console.log(req.url)
-        var beerID = req.url.slice(11);
+        var beerID = req.url.slice(14);
         console.log(beerID)
         var params = {
           TableName : 'awseb-e-mcqqphcgry-stack-CraftyBeersTable-1IEZA65VF1WX2',
@@ -124,6 +124,47 @@ if (cluster.isMaster) {
         });
 
     })
+
+    app.get('/api/beers/name=:name', function(req, res) {
+
+      function toTitleCase(str)
+      {
+        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+      }
+
+      var rawRequest = req.url.slice(16);
+      console.log(rawRequest)
+      var captalizedRequest = toTitleCase(rawRequest)
+      var beerName = decodeURI(captalizedRequest)
+      console.log(beerName)
+      var params = {
+        TableName:  "awseb-e-mcqqphcgry-stack-CraftyBeersTable-1IEZA65VF1WX2",
+        ProjectionExpression: "#id, #name, #type, #abv, #brewery, #description",
+        ExpressionAttributeNames: {
+          "#id": "id",
+          "#name": "name",
+          "#type": "type",
+          "#abv": "abv",
+          "#brewery": "brewery",
+          "#description": "description"
+        },
+        FilterExpression: "#name = :name",
+        ExpressionAttributeValues: {
+          ":name": toTitleCase(beerName),
+        }
+      };
+      docClient.scan(params, function(err, data) {
+        if (err) {
+          console.log("Error", err);
+        } else {
+          console.log("Success", data.Items);
+          res.send(data.Items)
+          data.Items.forEach(function(element, index, array) {
+            console.log(element.type + " (" + element.name + " " + element.abv + "%" + ")");
+          });
+        }
+      });
+    });
 
 
 
