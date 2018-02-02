@@ -84,7 +84,6 @@ if (cluster.isMaster) {
 
     app.get('/api/beers', function(req, res) {
 
-      console.log(req.url.any)
       function toTitleCase(str)
       {
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
@@ -107,9 +106,10 @@ if (cluster.isMaster) {
           "#brewery": "brewery",
           "#description": "description"
         },
-        FilterExpression: "#name = :name",
+        FilterExpression: "#name = :name OR #type = :type",
         ExpressionAttributeValues: {
           ":name": toTitleCase(beerName),
+          ":type": toTitleCase(beerName)
         }
       };
       docClient.scan(params, function(err, data) {
