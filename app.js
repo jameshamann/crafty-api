@@ -126,15 +126,16 @@ if (cluster.isMaster) {
     })
 
     app.get('/api/beers/name=:name', function(req, res) {
+
       function toTitleCase(str)
       {
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
       }
 
-      var rawBeerName = req.url.slice(16);
-      console.log(rawBeerName)
-      var capBeerName = toTitleCase(rawBeerName)
-      var beerName = decodeURI(capBeerName)
+      var rawRequest = req.url.slice(16);
+      console.log(rawRequest)
+      var captalizedRequest = toTitleCase(rawRequest)
+      var beerName = decodeURI(captalizedRequest)
       console.log(beerName)
       var params = {
         TableName:  "awseb-e-mcqqphcgry-stack-CraftyBeersTable-1IEZA65VF1WX2",
