@@ -131,11 +131,11 @@ if (cluster.isMaster) {
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
       }
 
-      var beerName = req.url.slice(16);
+      var rawBeerName = req.url.slice(16);
+      console.log(rawBeerName)
+      var capBeerName = toTitleCase(rawBeerName)
+      var beerName = decodeURI(capBeerName)
       console.log(beerName)
-
-      console.log(toTitleCase(beerName))
-
       var params = {
         TableName:  "awseb-e-mcqqphcgry-stack-CraftyBeersTable-1IEZA65VF1WX2",
         ProjectionExpression: "#id, #name, #type, #abv, #brewery, #description",
